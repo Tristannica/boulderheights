@@ -1,4 +1,4 @@
-// File: /Users/gilford.tristan/Desktop/boulderheights.community/frontend/src/app/page.tsx
+// File: /Users/gilford.tristan/codes/boulderheights.community/frontend/src/app/page.tsx
 import * as entry from '../../../src/app/page.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 

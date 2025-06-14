@@ -1,0 +1,30 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: bh
+      POSTGRES_PASSWORD: bhpass
+      POSTGRES_DB: bh
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"           # optional, exposes Postgres to host
+
+  api:
+    build: ./backend
+    restart: unless-stopped
+    environment:
+      # FastAPI will reach Postgres via service name `db`
+      DATABASE_URL: postgresql+asyncpg://bh:bhpass@db:5432/bh
+    depends_on:
+      - db
+    ports:
+      - "8000:8000"           # maps container 8000 → host 8000
+    volumes:
+      - ./backend/app:/app/app
+
+volumes:
+  db_data:
